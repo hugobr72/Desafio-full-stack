@@ -10,7 +10,7 @@ const index = () => {
       <div style={{ height: "100%" }}>
         <NavLink
           to="/cadastrar"
-          style={{ backgroundColor: "#003366", color: "#fff", height: "100%", padding: 10 }}
+          style={{  color: "#222", height: "100%", padding: 10, textDecoration: "none", fontWeight: "600" }}
         >
           Cadastrar Novo Cliente
         </NavLink>
