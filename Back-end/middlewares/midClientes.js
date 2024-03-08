@@ -30,8 +30,8 @@ const insertClientes = async (query) => {
 
 }
 const updateClientes = async (query) => {
+  const connection = new Client(connectionString)
   try {
-    const connection = new Client(connectionString)
     await connection.connect();
     const response = await connection.query(query);
     await connection.end();

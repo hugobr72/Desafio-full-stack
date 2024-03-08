@@ -55,7 +55,19 @@ const putService = async (body) => {
       return { error: "Email ou telefone não informado" }
     }
     let queryUpdate;
-    if (body.email && body.telefone) {
+
+    if (body.email && body.telefone && body.x && body.y) {
+      queryUpdate = `UPDATE clientes
+      SET email = '${body.email}', telefone = '${body.telefone}', x = ${body.x},
+      y = ${body.y}
+      WHERE id = ${body.id};`
+    }
+    else if (body.email && body.telefone && body.x) {
+      queryUpdate = `UPDATE clientes
+      SET email = '${body.email}', telefone = '${body.telefone}', x = ${body.x} 
+      WHERE id = ${body.id};`
+    }
+    else if (body.email && body.telefone) {
       queryUpdate = `UPDATE clientes
       SET email = '${body.email}', telefone = '${body.telefone}'
       WHERE id = ${body.id};`
@@ -135,7 +147,7 @@ function calcularRota(clientes) {
   )
 
   dcAux.shift()
-  dc.sort((a, b) => a.distancia - b.distancia).map((e,i) => {
+  dc.sort((a, b) => a.distancia - b.distancia).map((e, i) => {
     let clienteMenor;
     let indexMenor = 0;
     let distanciaMenor = null;
@@ -149,9 +161,9 @@ function calcularRota(clientes) {
       }
 
       if (index == dcAux.length - 1) {
-        const indexAntigo =  dc[i + 1]
-        dc.splice(i + 1, 1); 
-        dc.splice(i + 1, 0, indexAntigo); 
+        const indexAntigo = dc[i + 1]
+        dc.splice(i + 1, 1);
+        dc.splice(i + 1, 0, indexAntigo);
         clientesResponse.push(
           {
             id: e.id,
